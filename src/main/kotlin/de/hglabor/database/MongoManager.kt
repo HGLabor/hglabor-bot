@@ -13,7 +13,7 @@ object MongoManager {
         ConfigManager.databaseSettings.port ?: error(BotClient.logger.fatal("MongoDB login information cannot be null")),
         ConfigManager.databaseSettings.database ?: error(BotClient.logger.fatal("MongoDB login information cannot be null")),
         ConfigManager.databaseSettings.username ?: error(BotClient.logger.fatal("MongoDB login information cannot be null")),
-        ConfigManager.databaseSettings.password ?: error(BotClient.logger.fatal("MongoDB login information cannot be null")),
+        ConfigManager.databaseSettings.password?.replace("\"", "") ?: error(BotClient.logger.fatal("MongoDB login information cannot be null")),
     ))
 
     val roleButtons = mongoDB.getCollectionOrCreate<RoleButton>("hglaborBot_roleButtons")

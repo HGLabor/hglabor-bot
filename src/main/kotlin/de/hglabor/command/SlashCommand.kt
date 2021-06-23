@@ -18,5 +18,5 @@ abstract class SlashCommand(
         @Suppress("LeakingThis")
         CommandManager.register(this)
     }
-    abstract suspend fun handleCommand(interaction: CommandInteraction, logger: DiscordLogger, member: Member, guild: Guild)
+    abstract suspend fun handleCommand(interaction: CommandInteraction)
 }

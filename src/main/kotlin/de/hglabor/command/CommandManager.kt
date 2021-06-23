@@ -1,6 +1,7 @@
 package de.hglabor.command
 
 import de.hglabor.BotClient
+import de.hglabor.command.commands.RoleButtonsCommand
 import de.hglabor.guild
 import de.hglabor.logging.DiscordLogger
 import de.hglabor.member
@@ -28,6 +29,7 @@ object CommandManager {
     val commandScope = CoroutineScope(Dispatchers.IO)
 
     suspend fun init() {
+        RoleButtonsCommand
         commandScope.launch {
             cleanupGuilds()
         }
@@ -35,16 +37,20 @@ object CommandManager {
             BotClient.logger.info("Registering commands for ${it.name}")
         }
         commandScope.launch {
+            BotClient.logger.debug("Registering on guilds..")
             registerOnGuilds()
+            BotClient.logger.debug("Registered on guilds..")
         }
         BotClient.client.on<GuildCreateEvent> {
+            BotClient.logger.debug("Cleaning up ${guild.name}")
             this.guild.cleanupCommands()
+            BotClient.logger.debug("Registering commands for ${guild.name}")
             this.guild.registerCommands()
-            BotClient.logger.info("${this.guild.name} is ready")
+            BotClient.logger.info("${guild.name} is ready")
         }
         BotClient.client.on<InteractionCreateEvent> {
             if(interaction is CommandInteraction) {
-                commands[(interaction as CommandInteraction).command.rootName]?.handleCommand(interaction as CommandInteraction, DiscordLogger(interaction.channel, interaction.guild()), interaction.member(), interaction.guild())
+                commands[(interaction as CommandInteraction).command.rootName]?.handleCommand(interaction as CommandInteraction)
             }
         }
     }

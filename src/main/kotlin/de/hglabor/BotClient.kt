@@ -3,6 +3,7 @@ package de.hglabor
 import com.gitlab.kordlib.kordx.emoji.Emojis.label
 import de.hglabor.command.CommandManager
 import de.hglabor.config.ConfigManager
+import de.hglabor.database.MongoManager
 import de.hglabor.listener.ButtonListener
 import de.hglabor.logging.Logger
 import dev.kord.common.annotation.KordPreview
@@ -24,9 +25,13 @@ suspend fun main() {
     BotClient.start()
 }
 
+
+
 object BotClient {
 
     lateinit var client: Kord; private set
+
+    lateinit var hgLaborGuild: Guild
 
     val logger = Logger(System.out)
 
@@ -36,6 +41,7 @@ object BotClient {
         client = Kord(
             ConfigManager.discordSettings.token
                 ?: error("Configure the application before running it"))
+        hgLaborGuild = client.getGuild(Snowflake(ConfigManager.discordSettings.guildId!!))!!
         CommandManager.init()
         //REGISTER LISTENER
         ButtonListener
@@ -71,8 +77,14 @@ suspend fun Member.hasRole(id: Snowflake): Boolean {
 }
 
 @KordPreview
-suspend fun MessageChannelBehavior.createButton(buttonLabel: String, onClick: (member: Member) -> Unit, id: String) {
+suspend fun MessageChannelBehavior.createRoleButton(buttonLabel: String, id: String, roleId: String) {
+    val roleButton = RoleButton(
+        id,
+        roleId
+    )
+    MongoManager.roleButtons.insertOne(roleButton)
     createMessage {
+        content = "Click this button to get the ${BotClient.hgLaborGuild.getRole(Snowflake(roleId)).mention} role"
         actionRow {
             interactionButton(
                 style = ButtonStyle.Primary,
