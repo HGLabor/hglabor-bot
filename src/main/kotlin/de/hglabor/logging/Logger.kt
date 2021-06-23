@@ -1,5 +1,6 @@
 package de.hglabor.logging
 
+import de.hglabor.BotClient
 import dev.kord.common.Color
 import dev.kord.common.annotation.KordPreview
 import dev.kord.core.behavior.channel.MessageChannelBehavior
@@ -33,15 +34,18 @@ class Logger(val out: PrintStream) {
         return log(Level.FATAL, message)
     }
     fun fatal(message: String, exception: Exception): String {
-        var returned: String
-        returned = log(Level.FATAL, message)
+        val returned = log(Level.FATAL, message)
         exception.printStackTrace()
         return returned
     }
 
     fun log(level: Level, message: String): String {
-        out.println("[${Thread.currentThread()}/${level.name}]: $message")
-        return message
+        if(level.isEnabled) {
+            out.println("[${Thread.currentThread()}/${level.name}]: $message")
+            return message
+        } else {
+            return "The logger level ${level.name} is disabled"
+        }
     }
 
 }
@@ -49,39 +53,56 @@ class Logger(val out: PrintStream) {
 @KordPreview
 class DiscordLogger(val out: MessageChannelBehavior, val guild: Guild) {
 
-    suspend fun debug(message: String): Message {
-        return log(Level.DEBUG, message)
+    suspend fun debug(message: String) {
+        log(Level.DEBUG, message)
     }
 
-    suspend fun info(message: String): Message {
-        return log(Level.INFO, message)
+    suspend fun info(message: String) {
+        log(Level.INFO, message)
     }
 
-    suspend fun warn(message: String): Message {
-        return log(Level.WARN, message)
+    suspend fun warn(message: String) {
+        log(Level.WARN, message)
     }
 
-    suspend fun error(message: String): Message {
-        return log(Level.ERROR, message)
+    suspend fun error(message: String) {
+        log(Level.ERROR, message)
     }
 
-    suspend fun fatal(message: String): Message {
-        return log(Level.FATAL, message)
+    suspend fun fatal(message: String) {
+         log(Level.FATAL, message)
     }
-    suspend fun fatal(message: String, exception: Exception): Message {
-        val returned: Message = log(Level.FATAL, message)
+    suspend fun fatal(message: String, exception: Exception) {
+        log(Level.FATAL, message)
         exception.printStackTrace()
-        return returned
     }
 
-    suspend fun log(level: Level, message: String): Message {
-        return out.createEmbed {
-            title = message
-            color = Color(level.decimalColor)
-            val foot = EmbedBuilder.Footer()
-            foot.icon = guild.getIconUrl(Image.Format.GIF)!!
-            foot.text = guild.name
+    suspend fun log(level: Level, message: String) {
+        if(level.isEnabled) {
+            out.createEmbed {
+                title = message
+                color = Color(level.decimalColor)
+                val foot = EmbedBuilder.Footer()
+                foot.icon = guild.getIconUrl(Image.Format.GIF)!!
+                foot.text = guild.name
+            }
         }
     }
 
+}
+
+fun EmbedBuilder.log(level: Level, message: String) {
+    if(level.isEnabled) {
+        title = message
+        color = Color(level.decimalColor)
+        val foot = EmbedBuilder.Footer()
+        foot.icon = BotClient.hgLaborGuild.getIconUrl(Image.Format.GIF)!!
+        foot.text = BotClient.hgLaborGuild.name
+    } else {
+        title = "The logger level ${level.name} is disabled"
+        color = Color(Level.FATAL.decimalColor)
+        val foot = EmbedBuilder.Footer()
+        foot.icon = BotClient.hgLaborGuild.getIconUrl(Image.Format.GIF)!!
+        foot.text = BotClient.hgLaborGuild.name
+    }
 }

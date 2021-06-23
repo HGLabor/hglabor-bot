@@ -5,6 +5,7 @@ import de.hglabor.command.SlashCommand
 import de.hglabor.listener.ButtonListener
 import de.hglabor.logging.DiscordLogger
 import de.hglabor.logging.Level
+import de.hglabor.logging.log
 import dev.kord.common.Color
 import dev.kord.common.annotation.KordPreview
 import dev.kord.common.entity.Permission
@@ -41,8 +42,7 @@ object RoleButtonsCommand : SlashCommand(
         if(!interaction.member().hasPermission(Permission.ManageRoles)) {
             interaction.acknowledgeEphemeral().followUpEphemeral {
                 embed {
-                    color = Color(Level.ERROR.decimalColor)
-                    title = "You don't have permission to use this command."
+                    log(Level.ERROR, "You don't have permission to execute this command.")
                 }
             }
             return
@@ -57,8 +57,7 @@ object RoleButtonsCommand : SlashCommand(
                 delay(1000)
                 ButtonListener.registerButtons()
                 embed {
-                    color = Color(Level.DEBUG.decimalColor)
-                    title = "Created button!"
+                    log(Level.DEBUG, "Created the button.")
                 }
             }
         }
