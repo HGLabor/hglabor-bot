@@ -1,11 +1,13 @@
 package de.hglabor
 
-import com.gitlab.kordlib.kordx.emoji.Emojis.label
 import de.hglabor.command.CommandManager
 import de.hglabor.config.ConfigManager
 import de.hglabor.database.MongoManager
 import de.hglabor.listener.ButtonListener
 import de.hglabor.logging.Logger
+import de.hglabor.timers.Activity
+import de.hglabor.timers.applyActivity
+import de.hglabor.timers.launchTimer
 import dev.kord.common.annotation.KordPreview
 import dev.kord.common.entity.*
 import dev.kord.core.Kord
@@ -14,8 +16,6 @@ import dev.kord.core.behavior.channel.createMessage
 import dev.kord.core.entity.Guild
 import dev.kord.core.entity.Member
 import dev.kord.core.entity.interaction.Interaction
-import dev.kord.rest.builder.component.ActionRowBuilder
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.toList
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -24,8 +24,6 @@ import kotlinx.serialization.Serializable
 suspend fun main() {
     BotClient.start()
 }
-
-
 
 object BotClient {
 
@@ -45,7 +43,10 @@ object BotClient {
         CommandManager.init()
         //REGISTER LISTENER
         ButtonListener
-        client.login()
+        launchTimer()
+        client.login {
+            applyActivity(Activity.all.random())
+        }
     }
 }
 

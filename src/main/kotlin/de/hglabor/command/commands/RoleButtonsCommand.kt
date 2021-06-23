@@ -57,7 +57,7 @@ object RoleButtonsCommand : SlashCommand(
                 delay(1000)
                 ButtonListener.registerButtons()
                 embed {
-                    log(Level.DEBUG, "Created the button.")
+                    log(Level.INFO, "Created the button.")
                 }
             }
         }

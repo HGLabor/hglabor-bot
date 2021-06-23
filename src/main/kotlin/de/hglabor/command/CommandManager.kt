@@ -3,9 +3,11 @@ package de.hglabor.command
 import de.hglabor.BotClient
 import de.hglabor.command.commands.LoggerCommand
 import de.hglabor.command.commands.RoleButtonsCommand
+import de.hglabor.command.commands.StatsCommand
 import de.hglabor.guild
 import de.hglabor.logging.DiscordLogger
 import de.hglabor.member
+import de.hglabor.utils.WebAPIUtils
 import dev.kord.common.annotation.KordPreview
 import dev.kord.core.behavior.createApplicationCommand
 import dev.kord.core.entity.Guild
@@ -31,6 +33,7 @@ object CommandManager {
 
     suspend fun init() {
         LoggerCommand
+        StatsCommand
         RoleButtonsCommand
         commandScope.launch {
             cleanupGuilds()
@@ -41,13 +44,14 @@ object CommandManager {
         commandScope.launch {
             BotClient.logger.debug("Registering on guilds..")
             registerOnGuilds()
-            BotClient.logger.debug("Registered on guilds..")
+            BotClient.logger.debug("Registered on guilds!")
         }
         BotClient.client.on<GuildCreateEvent> {
             BotClient.logger.debug("Cleaning up ${guild.name}")
             this.guild.cleanupCommands()
             BotClient.logger.debug("Registering commands for ${guild.name}")
             this.guild.registerCommands()
+            this.guild.editSelfNickname(WebAPIUtils.getMotdHeader("hglabor.de"))
             BotClient.logger.info("${guild.name} is ready")
         }
         BotClient.client.on<InteractionCreateEvent> {

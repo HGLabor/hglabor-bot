@@ -11,6 +11,8 @@ import dev.kord.rest.Image
 import dev.kord.rest.builder.message.EmbedBuilder
 import java.io.PrintStream
 import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.util.*
 
 class Logger(val out: PrintStream) {
 
@@ -41,7 +43,7 @@ class Logger(val out: PrintStream) {
 
     fun log(level: Level, message: String): String {
         if(level.isEnabled) {
-            out.println("[${Thread.currentThread()}/${level.name}]: $message")
+            out.println("[${SimpleDateFormat("hh:MM:ss").format(Date())}] [${Thread.currentThread().threadGroup.name}/${level.name}]: $message")
             return message
         } else {
             return "The logger level ${level.name} is disabled"
@@ -85,6 +87,7 @@ class DiscordLogger(val out: MessageChannelBehavior, val guild: Guild) {
                 val foot = EmbedBuilder.Footer()
                 foot.icon = guild.getIconUrl(Image.Format.GIF)!!
                 foot.text = guild.name
+                footer = foot
             }
         }
     }
@@ -98,11 +101,13 @@ fun EmbedBuilder.log(level: Level, message: String) {
         val foot = EmbedBuilder.Footer()
         foot.icon = BotClient.hgLaborGuild.getIconUrl(Image.Format.GIF)!!
         foot.text = BotClient.hgLaborGuild.name
+        footer = foot
     } else {
         title = "The logger level ${level.name} is disabled"
         color = Color(Level.FATAL.decimalColor)
         val foot = EmbedBuilder.Footer()
         foot.icon = BotClient.hgLaborGuild.getIconUrl(Image.Format.GIF)!!
         foot.text = BotClient.hgLaborGuild.name
+        footer = foot
     }
 }
