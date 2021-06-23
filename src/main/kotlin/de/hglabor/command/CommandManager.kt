@@ -1,6 +1,7 @@
 package de.hglabor.command
 
 import de.hglabor.BotClient
+import de.hglabor.command.commands.LoggerCommand
 import de.hglabor.command.commands.RoleButtonsCommand
 import de.hglabor.guild
 import de.hglabor.logging.DiscordLogger
@@ -29,6 +30,7 @@ object CommandManager {
     val commandScope = CoroutineScope(Dispatchers.IO)
 
     suspend fun init() {
+        LoggerCommand
         RoleButtonsCommand
         commandScope.launch {
             cleanupGuilds()
