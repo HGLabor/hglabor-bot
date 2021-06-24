@@ -1,9 +1,7 @@
 package de.hglabor.command
 
 import de.hglabor.BotClient
-import de.hglabor.command.commands.LoggerCommand
-import de.hglabor.command.commands.RoleButtonsCommand
-import de.hglabor.command.commands.StatsCommand
+import de.hglabor.command.commands.*
 import de.hglabor.http.HttpUtils
 import dev.kord.common.annotation.KordPreview
 import dev.kord.core.behavior.createApplicationCommand
@@ -32,6 +30,10 @@ object CommandManager {
         LoggerCommand
         StatsCommand
         RoleButtonsCommand
+        CocoCommand
+        RandomCommand
+        AliasCommand
+        PostCommand
         commandScope.launch {
             cleanupGuilds()
         }
