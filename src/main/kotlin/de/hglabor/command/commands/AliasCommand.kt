@@ -52,7 +52,7 @@ object AliasCommand : SlashCommand(
                     embed {
                         color = Color(0,255,0)
                         title = "Alias created."
-                        description = "You can read the alias-tag with `/tag post $key`"
+                        description = "You can read the alias-tag with `/post post $key`"
                         footer {
                             icon = interaction.guild().getIconUrl(Image.Format.GIF)!!
                             text = interaction.guild().name
