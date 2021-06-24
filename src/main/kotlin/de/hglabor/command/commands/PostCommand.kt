@@ -26,15 +26,11 @@ object PostCommand : SlashCommand(
     override suspend fun handleCommand(interaction: CommandInteraction) {
         interaction.acknowledgePublic().followUp {
             val entry = interaction.command.options["entry"]?.string()
-            if (entry != null) {
+            content = if (entry != null) {
                 val alias = MongoManager.aliases.findOne("{\"key\":\"${entry}\"}")
-                content = alias?.value ?: "This alias could not been found. Try `/tag list`"
+                alias?.value ?: "This alias could not been found. Try `/tag list`"
             } else {
-                var listCompound = ""
-                for (alias in MongoManager.aliases.find()) {
-                    listCompound+=alias.key + ","
-                }
-                content = listCompound
+                MongoManager.aliases.find().toList().joinToString()
             }
         }
 
