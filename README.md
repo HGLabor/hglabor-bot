@@ -1,4 +1,4 @@
- ![logo](https://cdn.discordapp.com/icons/777536797601300490/36a3526828704111a95fb2bd3b436982.webp?size=128)
+ ![logo](https://cdn.discordapp.com/icons/777536797601300490/a_218962067dff5e3a7ed3b0a1174367d5.webp?size=256)
 
 ![discord](https://img.shields.io/discord/777536797601300490)
 ![open issues](https://img.shields.io/github/issues/HGLabor/hglabor-bot)
