@@ -3,6 +3,7 @@ package de.hglabor
 import de.hglabor.command.CommandManager
 import de.hglabor.config.ConfigManager
 import de.hglabor.database.MongoManager
+import de.hglabor.integration.TwitchIntegration
 import de.hglabor.listener.ButtonListener
 import de.hglabor.logging.Logger
 import de.hglabor.timers.Activity
@@ -44,6 +45,7 @@ object BotClient {
         //REGISTER LISTENER
         ButtonListener
         launchTimer()
+        TwitchIntegration.enable()
         client.login {
             applyActivity(Activity.all.random())
         }

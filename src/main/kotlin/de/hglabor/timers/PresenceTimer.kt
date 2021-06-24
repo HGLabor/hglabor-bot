@@ -1,12 +1,11 @@
 package de.hglabor.timers
 
 import de.hglabor.BotClient
-import de.hglabor.utils.WebAPIUtils
+import de.hglabor.http.HttpUtils
 import dev.kord.common.annotation.KordPreview
 import dev.kord.common.entity.ActivityType
 import dev.kord.gateway.builder.PresenceBuilder
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.toList
 import java.util.*
 
 fun launchTimer() {
@@ -68,8 +67,8 @@ data class Activity(val activityType: ActivityType, val what: String, val specia
     @KordPreview
     fun what(): String {
         return what
-            .replace("\${issues}", WebAPIUtils.getOpenGitHubIssues("hglabor", "hglabor-bot").toString())
-            .replace("\${players}", WebAPIUtils.getPlayerCount("hglabor.de"))
+            .replace("\${issues}", HttpUtils.getOpenGitHubIssues("hglabor", "hglabor-bot").toString())
+            .replace("\${players}", HttpUtils.getPlayerCount("hglabor.de"))
     }
 
     companion object {

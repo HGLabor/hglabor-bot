@@ -16,6 +16,11 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
+    implementation("com.github.philippheuer.credentialmanager:credentialmanager:0.0.5")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.12.3")
+    implementation("com.fasterxml.jackson.core:jackson-core:2.12.3")
+    implementation("com.fasterxml.jackson.core:jackson-annotations:2.12.3")
+    implementation("com.github.twitch4j:twitch4j:1.5.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
     implementation("com.google.code.gson:gson:2.8.6")
     implementation("dev.kord:kord-core:0.7.x-SNAPSHOT")

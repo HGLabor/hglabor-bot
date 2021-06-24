@@ -1,11 +1,7 @@
-package de.hglabor.utils
+package de.hglabor.http
 
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
-import de.hglabor.BotClient
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
@@ -13,7 +9,7 @@ import java.io.Reader
 import java.net.URL
 import java.nio.charset.Charset
 
-object WebAPIUtils {
+object HttpUtils {
 
     private fun readAll(rd: Reader): String {
         val sb = StringBuilder()
