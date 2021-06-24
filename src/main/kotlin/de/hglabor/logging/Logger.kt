@@ -84,10 +84,10 @@ class DiscordLogger(val out: MessageChannelBehavior, val guild: Guild) {
             out.createEmbed {
                 title = message
                 color = Color(level.decimalColor)
-                val foot = EmbedBuilder.Footer()
-                foot.icon = guild.getIconUrl(Image.Format.GIF)!!
-                foot.text = guild.name
-                footer = foot
+                footer {
+                    icon = guild.getIconUrl(Image.Format.GIF)!!
+                    text = guild.name
+                }
             }
         }
     }
@@ -98,16 +98,16 @@ fun EmbedBuilder.log(level: Level, message: String) {
     if(level.isEnabled) {
         title = message
         color = Color(level.decimalColor)
-        val foot = EmbedBuilder.Footer()
-        foot.icon = BotClient.hgLaborGuild.getIconUrl(Image.Format.GIF)!!
-        foot.text = BotClient.hgLaborGuild.name
-        footer = foot
+        footer {
+            icon = BotClient.hgLaborGuild.getIconUrl(Image.Format.GIF)!!
+            text = BotClient.hgLaborGuild.name
+        }
     } else {
         title = "The logger level ${level.name} is disabled"
         color = Color(Level.FATAL.decimalColor)
-        val foot = EmbedBuilder.Footer()
-        foot.icon = BotClient.hgLaborGuild.getIconUrl(Image.Format.GIF)!!
-        foot.text = BotClient.hgLaborGuild.name
-        footer = foot
+        footer {
+            icon = BotClient.hgLaborGuild.getIconUrl(Image.Format.GIF)!!
+            text = BotClient.hgLaborGuild.name
+        }
     }
 }
