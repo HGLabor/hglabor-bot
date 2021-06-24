@@ -1,4 +1,4 @@
-package de.hglabor.config.data
+package de.hglabor.data
 
 data class TwitchApplication(
     val clientId: String? = null,

@@ -21,16 +21,17 @@ object TwitchIntegration {
     @KordPreview
     fun enable() {
         var sentMessage: Snowflake? = null
-        //val credential = OAuth2Credential("twitch", ConfigManager.twitchSettings.token ?: BotClient.logger.fatal("Twitch credential cannot be null", NullPointerException()))
+        val credential = OAuth2Credential("twitch", ConfigManager.twitchSettings.token ?: BotClient.logger.fatal("Twitch credential cannot be null", NullPointerException()))
         twitchClient = TwitchClientBuilder.builder()
             .withEnableHelix(true)
             .withClientId(ConfigManager.twitchSettings.clientId ?: BotClient.logger.fatal("Twitch credential cannot be null", NullPointerException()))
-            //.withChatAccount(credential)
+            .withChatAccount(credential)
             .withEnableKraken(true)
-            //.withDefaultAuthToken(credential)
+            .withDefaultAuthToken(credential)
             .withClientSecret(ConfigManager.twitchSettings.clientSecret ?: BotClient.logger.fatal("Twitch credential cannot be null", NullPointerException()))
             .withEnableChat(true)
             .build()
+        twitchClient.chat.joinChannel("norisk")
         twitchClient.eventManager.onEvent(ChannelGoOfflineEvent::class.java) {
             suspend {
                 val mediaChannel = BotClient.hgLaborGuild.getChannel(Snowflake(ConfigManager.discordSettings.mediaChannelId ?: BotClient.logger.error("Discord application cannot be null"))) as MessageChannelBehavior
@@ -41,6 +42,7 @@ object TwitchIntegration {
             }
         }
         twitchClient.eventManager.onEvent(ChannelGoLiveEvent::class.java) {
+            BotClient.logger.debug("${it.channel.name} went live")
             suspend {
                 val twitchPingRole = BotClient.hgLaborGuild.getRole(Snowflake(ConfigManager.discordSettings.twitchPingRole ?: BotClient.logger.error("Discord application cannot be null")))
                 val mediaChannel = BotClient.hgLaborGuild.getChannel(Snowflake(ConfigManager.discordSettings.mediaChannelId ?: BotClient.logger.error("Discord application cannot be null"))) as MessageChannelBehavior

@@ -3,6 +3,7 @@ package de.hglabor.database
 import de.hglabor.BotClient
 import de.hglabor.RoleButton
 import de.hglabor.config.ConfigManager
+import de.hglabor.data.Alias
 import net.axay.blueutils.database.DatabaseLoginInformation
 import net.axay.blueutils.database.mongodb.MongoDB
 
@@ -17,5 +18,7 @@ object MongoManager {
     ))
 
     val roleButtons = mongoDB.getCollectionOrCreate<RoleButton>("hglaborBot_roleButtons")
+
+    val aliases = mongoDB.getCollectionOrCreate<Alias>("hglaborBot_aliases")
 
 }

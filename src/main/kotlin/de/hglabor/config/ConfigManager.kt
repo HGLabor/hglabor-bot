@@ -1,9 +1,9 @@
 package de.hglabor.config
 
 import com.typesafe.config.ConfigFactory
-import de.hglabor.config.data.DatabaseSettings
-import de.hglabor.config.data.DiscordApplication
-import de.hglabor.config.data.TwitchApplication
+import de.hglabor.data.DatabaseSettings
+import de.hglabor.data.DiscordApplication
+import de.hglabor.data.TwitchApplication
 import io.github.config4k.extract
 import java.io.File
 
