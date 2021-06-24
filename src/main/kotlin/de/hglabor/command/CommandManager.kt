@@ -27,6 +27,7 @@ object CommandManager {
     val commandScope = CoroutineScope(Dispatchers.IO)
 
     suspend fun init() {
+        UhcCommand
         LoggerCommand
         StatsCommand
         RoleButtonsCommand
