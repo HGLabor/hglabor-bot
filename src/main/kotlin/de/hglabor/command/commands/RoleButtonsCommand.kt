@@ -25,7 +25,7 @@ import java.util.*
 @KordPreview
 object RoleButtonsCommand : SlashCommand(
     "rolebutton",
-    "haha reaction roles goes brrrr", //Create a button to get a role when pressing it
+    " //Create a button to get a role when pressing it",
     {
         //subCommand("create", "Create a new button") {
             string("channelid", "The ID of the channel where the button should be created") {
