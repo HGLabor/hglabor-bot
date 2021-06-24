@@ -2,7 +2,7 @@
 
 ![discord](https://img.shields.io/discord/777536797601300490)
 ![open issues](https://img.shields.io/github/issues/HGLabor/hglabor-bot)
-# NoRiskClientBotRemastered
+# HGLabor Bot
 
 This is the bot for the official HGLABOR discord server.
 The bot provides a collection of usefull commands (and fun-commands) & functunallity for the specific channels.
