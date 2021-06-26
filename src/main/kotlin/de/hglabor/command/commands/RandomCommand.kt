@@ -28,7 +28,8 @@ object RandomCommand : SlashCommand(
         "scheiß server wegen heckern",
         "https://i.imgur.com/CCBxmWQ.png",
         "https://i.imgur.com/pyhxKAV.png",
-        "https://i.imgur.com/Hd7nYky.png"
+        "https://i.imgur.com/Hd7nYky.png",
+        "https://cdn.discordapp.com/attachments/777539157903671316/858278556474540033/unknown.png"
     )
 
     override suspend fun handleCommand(interaction: CommandInteraction) {
