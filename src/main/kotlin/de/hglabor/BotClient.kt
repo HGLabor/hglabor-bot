@@ -65,7 +65,7 @@ suspend fun Interaction.member(): Member  {
 
 @KordPreview
 suspend fun Member.hasPermission(permission: Permission): Boolean {
-    return getPermissions().contains(permission) || hasPermission(Permission.Administrator)
+    return getPermissions().contains(permission) || getPermissions().contains(Permission.Administrator)
 }
 
 @KordPreview
