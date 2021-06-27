@@ -58,7 +58,7 @@ object UhcCommand : SlashCommand(
                         "I hope we see us on there ${Emojis.relaxed} \n" +
                         "GL&HF ${Emojis.fourLeafClover}\n" +
                         "\n" +
-                        "${BotClient.hgLaborGuild.getRole(Snowflake("857592203794448385")).mention}"
+                        "${BotClient.hgLaborGuild.getRole(Snowflake("857590545562861588")).mention}"
             }
         } else {
             interaction.acknowledgeEphemeral().followUpEphemeral {
