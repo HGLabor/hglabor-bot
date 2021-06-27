@@ -29,15 +29,12 @@ object UhcCommand : SlashCommand(
     }
 ) {
     override suspend fun handleCommand(interaction: CommandInteraction) {
-        val isAdmin = interaction.user.asMemberOrNull(interaction.data.guildId.value ?: return)
-            ?.getPermissions()?.contains(Permission.Administrator) == true
-
+        val isAdmin = interaction.user.asMemberOrNull(interaction.data.guildId.value ?: return)?.getPermissions()?.contains(Permission.Administrator) == true
         if (isAdmin) {
             val host = interaction.command.options["host"]?.string().orEmpty()
             val time = interaction.command.options["time"]?.string().orEmpty()
             val hostmedia = interaction.command.options["hostmedia"]?.string().orEmpty()
             val teamsize = interaction.command.options["teamsize"]?.string().orEmpty()
-
             interaction.acknowledgePublic().followUp {
                 content = "${Emojis.comet} **Uhc Event** \n" +
                         "\n" +
