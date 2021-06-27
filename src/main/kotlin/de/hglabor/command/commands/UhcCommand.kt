@@ -18,7 +18,7 @@ import dev.kord.rest.builder.interaction.embed
 @KordPreview
 object UhcCommand : SlashCommand(
     "uhc",
-    "Auto-generate a Uhc event",
+    "Auto-generate an UHC event",
     {
 
         string("host", "Host des UHC's")
@@ -39,14 +39,14 @@ object UhcCommand : SlashCommand(
             val teamsize = interaction.command.options["teamsize"]?.string().orEmpty()
 
             interaction.acknowledgePublic().followUp {
-                content = "${Emojis.comet} **Uhc Event** \n" +
+                content = "${Emojis.comet} **UHC EVENT** \n" +
                         "\n" +
                         "${Emojis.door} *knock knock...* \n" +
                         "${Emojis.faceWithRaisedEyebrow} who's there? \n" +
                         "\n" +
-                        "Another HGLabor UHC event. \n" +
-                        "HGLabor is going to host **ANOTHER** Uhc event. \n" +
-                        "If you want to play the event make sure to... \n" +
+                        "Another HGLabor UHC Event. \n" +
+                        "HGLabor is going to host **ANOTHER** UHC Event. \n" +
+                        "If you want to play the Event make sure to... \n" +
                         "\n" +
                         "Join: `uhc.hglabor.de` ${Emojis.testTube} at `${time}` ${Emojis.clock1} \n" +
                         "\n" +
