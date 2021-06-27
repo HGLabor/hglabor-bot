@@ -29,7 +29,7 @@ object RandomCommand : SlashCommand(
         "https://i.imgur.com/CCBxmWQ.png",
         "https://i.imgur.com/pyhxKAV.png",
         "https://i.imgur.com/Hd7nYky.png",
-        "https://cdn.discordapp.com/attachments/777539157903671316/858285158183206912/unknown.png"
+        "https://cdn.discordapp.com/attachments/777539157903671316/858285158183206912/unknown.png",
         "https://cdn.discordapp.com/attachments/777539157903671316/858278556474540033/unknown.png"
     )
 
