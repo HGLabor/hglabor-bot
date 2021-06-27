@@ -18,7 +18,7 @@ import dev.kord.rest.builder.interaction.embed
 @KordPreview
 object UhcCommand : SlashCommand(
     "uhc",
-    "Auto-generate a Uhc event",
+    "Auto-generate an UHC event",
     {
 
         string("host", "Host des UHC's")
@@ -36,14 +36,14 @@ object UhcCommand : SlashCommand(
             val hostmedia = interaction.command.options["hostmedia"]?.string().orEmpty()
             val teamsize = interaction.command.options["teamsize"]?.string().orEmpty()
             interaction.acknowledgePublic().followUp {
-                content = "${Emojis.comet} **Uhc Event** \n" +
+                content = "${Emojis.comet} **UHC EVENT** \n" +
                         "\n" +
                         "${Emojis.door} *knock knock...* \n" +
                         "${Emojis.faceWithRaisedEyebrow} who's there? \n" +
                         "\n" +
-                        "Another HGLabor UHC event. \n" +
-                        "HGLabor is going to host **ANOTHER** Uhc event. \n" +
-                        "If you want to play the event make sure to... \n" +
+                        "Another HGLabor UHC Event. \n" +
+                        "HGLabor is going to host **ANOTHER** UHC Event. \n" +
+                        "If you want to play the Event make sure to... \n" +
                         "\n" +
                         "Join: `uhc.hglabor.de` ${Emojis.testTube} at `${time}` ${Emojis.clock1} \n" +
                         "\n" +
@@ -55,7 +55,7 @@ object UhcCommand : SlashCommand(
                         "I hope we see us on there ${Emojis.relaxed} \n" +
                         "GL&HF ${Emojis.fourLeafClover}\n" +
                         "\n" +
-                        "${BotClient.hgLaborGuild.getRole(Snowflake("857592203794448385")).mention}"
+                        "${BotClient.hgLaborGuild.getRole(Snowflake("857590545562861588")).mention}"
             }
         } else {
             interaction.acknowledgeEphemeral().followUpEphemeral {
